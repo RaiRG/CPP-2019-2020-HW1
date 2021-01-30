@@ -16,6 +16,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*
+Изменить публичный интерфейс класса User так, чтобы можно было
+
+добавлять студентов
+удалять студентов по индексу
+удалять из списка студента по имени, если он там есть; если нет, то ничего не делать
+получать их кол-во
+*/
 
 class User{
     int age; // private
@@ -41,6 +49,27 @@ public:
         return total_count;
     }
     static std::vector<User> users_;
+    void addStudent(User newStudent)
+    {
+        users_.push_back(newStudent);
+    }
+    void delteStudentByNumber(int number)
+    {
+        users_.erase(users_.begin()+number);
+    }
+    void deleteStudentByName(QString name)
+    {
+        for (int i =0; i<(int)users_.size(); i++)
+        {
+            if (users_[i].name == name)
+                users_.erase(users_.begin()+i);
+
+        }
+    }
+    int getNumberOfStudent()
+    {
+        return (int)users_.size();
+    }
 };
 
 int User::total_count = 0;
